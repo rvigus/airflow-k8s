@@ -1,8 +1,15 @@
-from sqlalchemy import create_engine
-from airflow.models import Variable
+from kubernetes.client import models as k8s
+from dotenv import load_dotenv
+import os
 
-def get_postgres_engine(conn):
-    return create_engine(Variable.get(conn))
+def generate_k8s_secrets(secret_names):
+    load_dotenv(verbose=True)
+    k8s_secrets = []
+    for name in secret_names:
+        k8s_secrets.append(
+            k8s.V1EnvVar(name=name, value=os.environ.get(name, ''))
+        )
+    return k8s_secrets
 
 def read_sql(path: str, multi=False):
     """

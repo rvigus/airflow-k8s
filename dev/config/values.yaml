@@ -46,7 +46,7 @@ securityContext: {}
 airflowHome: /opt/airflow
 
 # Default airflow repository -- overridden by all the specific images below
-defaultAirflowRepository: rory-airflow
+defaultAirflowRepository: local-airflow
 
 # Default airflow tag to deploy
 defaultAirflowTag: latest

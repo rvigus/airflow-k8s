@@ -2,6 +2,8 @@ from datetime import datetime
 
 from airflow import DAG
 from airflow.providers.cncf.kubernetes.operators.kubernetes_pod import KubernetesPodOperator
+from utils.common import generate_k8s_secrets
+from utils.constants import DBT_PROFILES_PARAM_NAMES
 
 
 dag = DAG(
@@ -15,7 +17,8 @@ dag = DAG(
 
 test_run = KubernetesPodOperator(
     namespace="airflow",
-    image="localhost:5000/dbt-snowflake",
+    image="localhost:5000/dbt-snowflake:latest",
+    env_vars=generate_k8s_secrets(DBT_PROFILES_PARAM_NAMES),
     cmds=["dbt"],
     arguments=["run", "--select", "test", "--full-refresh"],
     name="dbt-pod",
