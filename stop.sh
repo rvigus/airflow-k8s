@@ -1,0 +1,1 @@
+kind delete clusters airflow-cluster

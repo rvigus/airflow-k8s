@@ -1,8 +1,8 @@
-# airflow-k8s
-local airflow running on kubernetes
+# Airflow running on K8's
 
-# Getting started
-1) ./start.sh 
-2) ./expose.sh -> will start port forwarding and allow access to Airflow webserver
-3) If you want to run DBT models, please see README inside DBT repo for instructions.
-
+## Table of contents
+* [Getting Started](#gettingstarted)
+  * [Prerequisites](#prerequisites)
+  * [Installation](#installation)
+* [Usage](#usage)
+* 

@@ -1,7 +1,9 @@
 from datetime import datetime
 
 from airflow import DAG
-from airflow.providers.cncf.kubernetes.operators.kubernetes_pod import KubernetesPodOperator
+from airflow.providers.cncf.kubernetes.operators.kubernetes_pod import (
+    KubernetesPodOperator,
+)
 from utils.common import generate_k8s_secrets
 from utils.constants import DBT_PROFILES_PARAM_NAMES
 
@@ -27,7 +29,5 @@ test_run = KubernetesPodOperator(
     task_id="test_run",
     get_logs=True,
     image_pull_policy="IfNotPresent",
-    dag=dag
+    dag=dag,
 )
-
-

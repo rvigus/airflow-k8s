@@ -6,9 +6,8 @@ metadata:
     app: airflow-logs
 spec:
   storageClassName: manual
-
   capacity:
-    storage: 20Gi
+    storage: 30Gi
   accessModes:
     - ReadWriteMany
   claimRef:

@@ -4,7 +4,7 @@ CONFIG_PATH=./dev/config
 docker build --no-cache -t local-airflow:latest .
 kind load docker-image local-airflow:latest --name airflow-cluster
 
-# kill running port-forward commands
+# kill any running port-forward commands
 pgrep kubectl | xargs kill -9
 
 # re-install on cluster
