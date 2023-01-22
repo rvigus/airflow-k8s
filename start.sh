@@ -16,7 +16,8 @@ kubectl apply -f $CONFIG_PATH/pv-claim.yaml
 # run helm install
 helm repo add apache-airflow https://airflow.apache.org
 helm repo update
-helm install airflow apache-airflow/airflow --namespace airflow --debug
+# 1.7.0 helm chart == airflow 2.4.1
+helm install airflow apache-airflow/airflow --version 1.7.0 --namespace airflow --debug
 
 # create local image registry
 if ! docker container ls -f "status=running" | grep -q $REGISTRY_NAME; then
