@@ -24,5 +24,23 @@ if ! docker container ls -f "status=running" | grep -q $REGISTRY_NAME; then
   docker run -d --restart=always -p 5000:5000 --name "$REGISTRY_NAME" --network kind registry:2
 fi
 
+
+# spin up localstack
+LOCALSTACK_NAME='my_localstack'
+if ! docker container ls -f "status=running" | grep -q $LOCALSTACK_NAME; then
+  docker run --rm -it -d -p 4566:4566 -p 4510-4559:4510-4559 --network kind --name localstack/localstack
+  sleep 10
+
+  # set keys
+  aws configure set aws_access_key_id test --profile localstack
+  aws configure set aws_secret_access_key test --profile localstack
+  aws configure set aws_default_region us-east-1 --profile localstack
+
+  # Create a bucket called data
+  aws --endpoint-url=http://localhost:4566 --profile localstack s3 mb s3://data
+
+fi
+
+
 # run deploy script
 ./deploy.sh
